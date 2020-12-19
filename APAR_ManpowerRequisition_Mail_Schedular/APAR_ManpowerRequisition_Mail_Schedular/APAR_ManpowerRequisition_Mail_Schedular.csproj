@@ -33,8 +33,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.SharePoint.Client, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.Client">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.DocumentManagement">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.DocumentManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Publishing">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.Publishing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Search">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.Search.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Search.Applications">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.Search.Applications.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.ServerRuntime">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.ServerRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Taxonomy">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.Taxonomy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.UserProfiles">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.UserProfiles.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.WorkflowServices">
+      <HintPath>..\..\..\Apar_Stamping_AR\AR\Apar_Stamping_AR\Apar_Stamping_AR\bin\Debug\Microsoft.SharePoint.Client.WorkflowServices.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />

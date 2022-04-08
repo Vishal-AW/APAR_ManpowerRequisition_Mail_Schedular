@@ -33,6 +33,14 @@ namespace APAR_ManpowerRequisition_Mail_Schedular.Models
         public string Modified { get; set; }
         //public string TravelType { get; set; }
 
+        public string CurrentApprover { get; set; }
+
+        public string FunctionalHeadName { get; set; }
+        public string HRHeadName { get; set; }
+        public string HRHeadOnlyName { get; set; }
+        public string MDorJMDName { get; set; }
+        public string RecruiterName { get; set; }
+        public string CurrentApproverName { get; set; }
     }
     //public class Mailing
     //{

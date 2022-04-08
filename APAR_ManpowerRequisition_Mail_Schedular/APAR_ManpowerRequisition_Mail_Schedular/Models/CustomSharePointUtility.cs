@@ -164,6 +164,7 @@ namespace APAR_ManpowerRequisition_Mail_Schedular.Models
                                 <FieldRef Name='ReplacementEmployeeName'/>
                                 <FieldRef Name='AdditionalBudgets'/>
                                 <FieldRef Name='Modified'/>
+                                <FieldRef Name='CurrentApprover'/>
                                 </ViewFields></View>";
                             MSC.ListItemCollection Items = list.GetItems(camlQuery);
 
@@ -183,14 +184,24 @@ namespace APAR_ManpowerRequisition_Mail_Schedular.Models
                                     Division = Convert.ToString(item["Division"]).Trim(),
 
                                     //Author = Convert.ToString((item["Author"] as Microsoft.SharePoint.Client.FieldUserValue).LookupId),
-                                    Author = Convert.ToString((item["Author"] as Microsoft.SharePoint.Client.FieldUserValue).LookupValue),
-                                    FunctionalHead = item["FunctionalHead"] == null?"" : Convert.ToString((item["FunctionalHead"] as Microsoft.SharePoint.Client.FieldUserValue[])[0].LookupId),
+                                   // AuthorName = Convert.ToString((item["Author"] as Microsoft.SharePoint.Client.FieldUserValue).LookupValue),
+                                    FunctionalHeadName = item["FunctionalHead"] == null?"" : Convert.ToString((item["FunctionalHead"] as Microsoft.SharePoint.Client.FieldUserValue[])[0].LookupValue),
+                                    HRHeadName = item["HRHead"] == null ? "" : Convert.ToString((item["HRHead"] as Microsoft.SharePoint.Client.FieldUserValue[])[0].LookupValue),
+                                    HRHeadOnlyName = item["HRHeadOnly"] == null ? "" : Convert.ToString((item["HRHeadOnly"] as Microsoft.SharePoint.Client.FieldUserValue).LookupValue),
+                                    MDorJMDName = item["MDorJMD"] == null ? "" : Convert.ToString((item["MDorJMD"] as Microsoft.SharePoint.Client.FieldUserValue).LookupValue),
+                                    RecruiterName = item["Recruiter"] == null ? "" : Convert.ToString((item["Recruiter"] as Microsoft.SharePoint.Client.FieldUserValue[])[0].LookupValue),
+                                    CurrentApproverName = item["CurrentApprover"] == null ? "" : Convert.ToString((item["CurrentApprover"] as Microsoft.SharePoint.Client.FieldUserValue).LookupValue),
+
+                                    FunctionalHead = item["FunctionalHead"] == null ? "" : Convert.ToString((item["FunctionalHead"] as Microsoft.SharePoint.Client.FieldUserValue[])[0].LookupId),
                                     HRHead = item["HRHead"] == null ? "" : Convert.ToString((item["HRHead"] as Microsoft.SharePoint.Client.FieldUserValue[])[0].LookupId),
                                     HRHeadOnly = item["HRHeadOnly"] == null ? "" : Convert.ToString((item["HRHeadOnly"] as Microsoft.SharePoint.Client.FieldUserValue).LookupId),
                                     MDorJMD = item["MDorJMD"] == null ? "" : Convert.ToString((item["MDorJMD"] as Microsoft.SharePoint.Client.FieldUserValue).LookupId),
                                     Recruiter = item["Recruiter"] == null ? "" : Convert.ToString((item["Recruiter"] as Microsoft.SharePoint.Client.FieldUserValue[])[0].LookupId),
+                                    CurrentApprover = item["CurrentApprover"] == null ? "" : Convert.ToString((item["CurrentApprover"] as Microsoft.SharePoint.Client.FieldUserValue).LookupId),
 
-                                    Status = Convert.ToString((item["Status"] as Microsoft.SharePoint.Client.FieldLookupValue).LookupValue),
+                                   
+
+                                Status = Convert.ToString((item["Status"] as Microsoft.SharePoint.Client.FieldLookupValue).LookupValue),
                                     IsRejected = Convert.ToString(item["IsRejected"]).Trim(),
                                     CreatedTime = Convert.ToString(item["CreatedTime"]).Trim(),
                                     ReplacementEmployeeName = Convert.ToString(item["ReplacementEmployeeName"]).Trim(),
@@ -252,7 +263,12 @@ namespace APAR_ManpowerRequisition_Mail_Schedular.Models
                                 var _Subject = "";
                                 if (updateItem.Status == "Pending With Functional Head")
                                 {
-                                    _To = updateItem.FunctionalHead;
+                                   // _To = updateItem.FunctionalHead;
+                                    _To = updateItem.CurrentApprover;
+                                    if(_To == "")
+                                    {
+                                        break;
+                                    }
                                 }
                                 else if (updateItem.Status == "Pending With HR Head")
                                 {
@@ -277,31 +293,32 @@ namespace APAR_ManpowerRequisition_Mail_Schedular.Models
                                 _Body += "<br><b>Date of Creation :</b>  " + updateItem.CreatedTime;
                                 _Body += "<br><b>Employee : </b> " + updateItem.Author;
                                 _Body += "<br><b>Designation :</b> " + updateItem.Designation;
-
                                 _Body += "<br><b>Department :</b> " + updateItem.Department;
                                 _Body += "<br><b>Budgeted / Replacement Additional:</b> " + updateItem.AdditionalBudgets;
                                 _Body += "<br><b>Location :</b> " + updateItem.CreatorLocation;
                                 _Body += "<br><b>Replacement of :</b> " + updateItem.ReplacementEmployeeName;
+
                                 if (updateItem.Status == "Pending With Functional Head")
                                 {
-                                    _Body += "<br><b>Status :</b> " + updateItem.Status;
+                                    _Body += "<br><b>Pending With  :</b> " + updateItem.CurrentApproverName;
                                 }
                                 else if (updateItem.Status == "Pending With HR Head")
                                 {
-                                    _Body += "<br><b>Status :</b> " + updateItem.Status;
+                                    _Body += "<br><b>Pending With  :</b> " + updateItem.HRHeadName;
                                 }
                                 else if (updateItem.Status == "Confirmed By MD And Back to HR Head")
                                 {
-                                    _Body += "<br><b>Status :</b> " + updateItem.Status;
+                                    _Body += "<br><b>Pending With  :</b> " + updateItem.HRHeadOnlyName;
                                 }
                                 else if (updateItem.Status == "Pending With MD")
                                 {
-                                    _Body += "<br><b>Status :</b> " + updateItem.Status;
+                                    _Body += "<br><b>Pending With  :</b> " + updateItem.MDorJMDName;
                                 }
                                 else if (updateItem.Status == "Pending With Recruiter")
                                 {
-                                    _Body += "<br><b>Status :</b> " + updateItem.Status;
+                                    _Body += "<br><b>Pending With  :</b> " + updateItem.RecruiterName;
                                 }
+
 
                                 _Body += "<br><h3>Kindly provide your approval</h3>";
                                 _Body += "<br><h3>For Approval Please Click in the below link</h3>";
@@ -325,14 +342,9 @@ namespace APAR_ManpowerRequisition_Mail_Schedular.Models
                                 {
                                     _Body += "<br><a href=\"https://aparindltd.sharepoint.com/ManpowerRequisition/SitePages/Pending%20With%20Recruiter.aspx\">View Link</a>";
                                 }
+
                                
 
-                                //data.MailTo = _From;
-                                //data.MailTo = _To;
-                                //data.MailCC = _Cc;
-                                //data.MailSubject = _Subject;
-                                //data.MailBody = _Body;
-                                //varx.Add(data);
                                 listItem["ToUser"] = _To;
                                 listItem["SubjectDesc"] = _Subject;
                                 listItem["BodyDesc"] = _Body;
